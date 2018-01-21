@@ -17,10 +17,23 @@
 
 /* MY FIRST I/O! =========================== */
 
-function countLines(file) {
-    const fs = require('fs');
-    let bufferObject = fs.readFileSync(process.argv[2]);
-    let lines = bufferObject.toString().split('\n').length - 1;
-    console.log(lines);
+// function countLines(file) {
+//     const fs = require('fs');
+//     let bufferObject = fs.readFileSync(process.argv[2]);
+//     let lines = bufferObject.toString().split('\n').length - 1;
+//     console.log(lines);
+// }
+// countLines();
+
+/* MY FIRST ASYNC I/O! ====================== */
+
+const fs = require('fs');
+
+function countLines() {
+    fs.readFile(process.argv[2], 'utf8', function doneReading(err, fileContents) {
+        let total = fileContents.toString().split('\n').length - 1;
+        console.log(total);
+    });
 }
+
 countLines();
