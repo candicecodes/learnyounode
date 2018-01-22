@@ -27,13 +27,27 @@
 
 /* MY FIRST ASYNC I/O! ====================== */
 
+// const fs = require('fs');
+
+// function countLines() {
+//     fs.readFile(process.argv[2], 'utf8', function doneReading(err, fileContents) {
+//         let total = fileContents.toString().split('\n').length - 1;
+//         console.log(total);
+//     });
+// }
+
+// countLines();
+
+/* FILTERED LS =============================== */
+
 const fs = require('fs');
-
-function countLines() {
-    fs.readFile(process.argv[2], 'utf8', function doneReading(err, fileContents) {
-        let total = fileContents.toString().split('\n').length - 1;
-        console.log(total);
-    });
-}
-
-countLines();
+const path = require('path');
+let argv = process.argv[2];
+let extension = process.argv[3];
+fs.readdir(argv, function doneReading(err, list) {
+    for(let i = 0; i <= list.length -1; i++) {
+        if(`.${extension}` === path.extname(list[i])) {
+            console.log(list[i]);
+        }
+    }
+});
