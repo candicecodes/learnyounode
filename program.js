@@ -1,10 +1,12 @@
-/* TIME SERVER ======================= */
+/* HTTP FILE SERVER =============== */
 
-const net = require('net');
-const strftime = require('strftime');
+const http = require('http');
+const fs = require('fs');
 const portNumber = Number(process.argv[2]);
+const fileToServe = process.argv[3];
 
-const server = net.createServer( socket => {
-    socket.end(strftime('%F %R', new Date()) + '\n');
+const server = http.createServer( (req, res) => {
+    res.writeHead(200, { 'content-type': 'text/plain' });
+    fs.createReadStream(fileToServe).pipe(res);
 });
 server.listen(portNumber);
